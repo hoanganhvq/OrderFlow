@@ -25,9 +25,6 @@
             <div class="mb-3">
                 <label class="form-label">Unit Price ($)</label>
                 <input type="number" step="0.01" class="form-control" @bind="unitPrice" />
-                <small class="text-muted d-block mt-1">
-                    *Tip demo:* Tổng giá có đuôi <strong>.99</strong> (VD: 19.99) sẽ kích hoạt lỗi thanh toán giả định để test compensation.
-                </small>
             </div>
             <button class="btn btn-primary w-100" @onclick="SubmitOrder" disabled="@isSubmitting">
                 @(isSubmitting ? "Placing Order..." : "Submit Order")
@@ -45,9 +42,9 @@
                 </div>
                 <hr />
                 <p><strong>Order ID:</strong> <code>@currentOrder.OrderId</code></p>
-                <p><strong>Total Amount:</strong> $@currentOrder.TotalAmount</p>
+                <p><strong>Total Amount:</strong> $@currentOrder.TotalPrice</p>
                 <p><strong>Inventory Reservation:</strong> @(currentOrder.ReservationCompleted ? "Completed" : "In Progress...")</p>
-                <p><strong>Payment Status:</strong> @(currentOrder.PaymentCompleted ? "Charged" : "Pending / Failed")</p>
+                <p><strong>Payment Status:</strong> @(currentOrder.PaymentCompleted ? "Success" : "Failed")</p>
                 <p><strong>Updated At:</strong> @currentOrder.UpdatedAt.ToLocalTime().ToString("HH:mm:ss")</p>
             </div>
         }
@@ -99,7 +96,7 @@
             currentOrder = await Client.GetOrderAsync(orderId);
             await InvokeAsync(StateHasChanged);
 
-            if (currentOrder?.Status is "Confirmed" or "Cancelled")
+            if (currentOrder?.Status is OrderStatus.Confirmed or OrderStatus.Cancelled)
             {
                 timer.Dispose();
                 break;
@@ -107,12 +104,12 @@
         }
     }
 
-    private string GetBadgeClass(string status) => status switch
+    private string GetBadgeClass(OrderStatus status) => status switch
     {
-        "Confirmed" => "bg-success",
-        "Cancelled" => "bg-danger",
-        "Charging" => "bg-warning text-dark",
-        "Reserving" => "bg-info text-dark",
+        OrderStatus.Confirmed => "bg-success",
+        OrderStatus.Cancelled => "bg-danger",
+        OrderStatus.Charging => "bg-warning text-dark",
+        OrderStatus.Reserving => "bg-info text-dark",
         _ => "bg-secondary"
     };
 

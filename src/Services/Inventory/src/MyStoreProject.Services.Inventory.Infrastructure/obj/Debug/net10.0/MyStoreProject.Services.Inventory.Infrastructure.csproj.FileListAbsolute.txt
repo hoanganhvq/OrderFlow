@@ -23,3 +23,4 @@
 /home/anhphan/CTU/C#/MyStoreProject/src/Services/Inventory/src/MyStoreProject.Services.Inventory.Infrastructure/obj/Debug/net10.0/ref/MyStoreProject.Services.Inventory.Infrastructure.dll
 /home/anhphan/CTU/C#/MyStoreProject/src/Services/Inventory/src/MyStoreProject.Services.Inventory.Infrastructure/bin/Debug/net10.0/BuildingBlocks.Messaging.dll
 /home/anhphan/CTU/C#/MyStoreProject/src/Services/Inventory/src/MyStoreProject.Services.Inventory.Infrastructure/bin/Debug/net10.0/BuildingBlocks.Messaging.pdb
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Inventory/src/MyStoreProject.Services.Inventory.Infrastructure/obj/Debug/net10.0/MyStoreProject.Services.Inventory.Infrastructure.sourcelink.json

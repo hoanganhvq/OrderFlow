@@ -71,9 +71,9 @@
                 @foreach (var ord in orders)
                 {
                     <tr>
-                        <td><code>@ord.Id</code></td>
-                        <td>$@ord.TotalAmount</td>
-                        <td><span class="badge @GetBadgeClass(ord.Status)">@ord.Status</span></td>
+                        <td><code>@ord.OrderId</code></td>
+                        <td>$@ord.TotalPrice</td>
+                        <td><span class="badge @GetBadgeClass(ord.Status.ToString())">@ord.Status</span></td>
                         <td>@ord.CreatedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")</td>
                     </tr>
                 }
@@ -83,7 +83,7 @@
 </div>
 
 @code {
-    private string customerId = "cust-123";
+    private string customerId = "customer-123";
     private List<InventoryDTO>? stocks;
     private List<OrderSummary>? orders;
 

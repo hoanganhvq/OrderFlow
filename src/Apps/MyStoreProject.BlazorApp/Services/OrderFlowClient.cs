@@ -35,7 +35,7 @@ public class OrderFlowClient(HttpClient http, IConfiguration configuration)
 
     public async Task<List<InventoryDTO>?> GetStockAsync()
     {
-        var result = await http.GetFromJsonAsync<List<InventoryDTO>>($"{_inventoryUrl}/stock");
+        var result = await http.GetFromJsonAsync<List<InventoryDTO>>($"{_inventoryUrl}/inventory");
         return result;
     }
 }

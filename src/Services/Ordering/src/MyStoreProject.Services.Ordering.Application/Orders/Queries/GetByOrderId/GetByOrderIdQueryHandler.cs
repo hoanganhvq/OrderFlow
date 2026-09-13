@@ -2,7 +2,6 @@ using BuildingBlocks.Common.Results;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MyStoreProject.Services.Ordering.Application.Abstractions.Data;
-using MyStoreProject.Services.Ordering.Application.Orders.Queries.GetByCustomerId;
 using MyStoreProject.Services.Ordering.Domain.Errors;
 
 namespace MyStoreProject.Services.Ordering.Application.Orders.Queries.GetByOrderId;
@@ -21,14 +20,19 @@ public class GetOrderByIdQueryHandler : IRequestHandler<GetByOrderIdQuery, Resul
     {
         var order = await _context.Orders
             .AsNoTracking()
+            .Include(o => o.OrderItems)
             .SingleOrDefaultAsync(o => o.Id == request.OrderId);
         
         if (order is null)
         {
             return Result<OrderResponse>.Failure(OrderErrors.OrderNotFound);   
         }
-
-        var response = new OrderResponse(order);
+        
+        var saga = await _context.OrderSagaStates.AsNoTracking()
+            .Where(s => s.OrderId == order.Id)
+            .FirstOrDefaultAsync(cancellationToken);
+        
+        var response = new OrderResponse(order, saga);
         return Result<OrderResponse>.Success(response);
     }
 }

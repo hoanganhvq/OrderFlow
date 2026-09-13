@@ -33,20 +33,12 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/anhphan/CTU/C\#/MyStoreProject/src/Apps/MyStoreProject.BlazorApp/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ291bnRlci5yYXpvcg==
+[/home/anhphan/CTU/C\#/MyStoreProject/src/Apps/MyStoreProject.BlazorApp/Pages/DashBoard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGFzaEJvYXJkLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/anhphan/CTU/C\#/MyStoreProject/src/Apps/MyStoreProject.BlazorApp/Pages/Home.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG9tZS5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[/home/anhphan/CTU/C\#/MyStoreProject/src/Apps/MyStoreProject.BlazorApp/Pages/NotFound.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTm90Rm91bmQucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[/home/anhphan/CTU/C\#/MyStoreProject/src/Apps/MyStoreProject.BlazorApp/Pages/Weather.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvV2VhdGhlci5yYXpvcg==
+[/home/anhphan/CTU/C\#/MyStoreProject/src/Apps/MyStoreProject.BlazorApp/Pages/PlaceOrder.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUGxhY2VPcmRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/anhphan/CTU/C\#/MyStoreProject/src/Apps/MyStoreProject.BlazorApp/_Imports.razor]

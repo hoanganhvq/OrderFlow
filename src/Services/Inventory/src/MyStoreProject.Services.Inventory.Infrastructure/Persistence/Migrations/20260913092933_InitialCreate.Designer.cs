@@ -12,8 +12,8 @@ using MyStoreProject.Services.Inventory.Infrastructure.Persistence;
 namespace MyStoreProject.Services.Inventory.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(InventoryDbContext))]
-    [Migration("20260913051948_add_row_version")]
-    partial class add_row_version
+    [Migration("20260913092933_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

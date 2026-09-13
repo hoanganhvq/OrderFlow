@@ -5,7 +5,7 @@ var e=!1;const t=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,
   "mainAssemblyName": "MyStoreProject.BlazorApp",
   "applicationEnvironment": "Development",
   "resources": {
-    "hash": "sha256-wCnypecvH6RJckbI41/hXrhJeAq6rzPNZpDpkP9tIb4=",
+    "hash": "sha256-l6zfxuZeySdlmffMkRfrIT5Iu1fj2LgxH7e3qZEAtr0=",
     "jsModuleNative": [
       {
         "name": "dotnet.native.rjbmzc4jpg.js"
@@ -1242,16 +1242,16 @@ var e=!1;const t=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,
       },
       {
         "virtualPath": "MyStoreProject.BlazorApp.wasm",
-        "name": "MyStoreProject.BlazorApp.vqq2453por.wasm",
-        "hash": "sha256-5xsj9xYM0TcwdBt5F9+9SxiEob4WAssJ1OwJ3X8nqKk=",
+        "name": "MyStoreProject.BlazorApp.m2xbzpnx21.wasm",
+        "hash": "sha256-LjP6i2QjzUlWq4gJzM35YiBT5vWv8eLhsn+C0js5Y2o=",
         "cache": "force-cache"
       }
     ],
     "pdb": [
       {
         "virtualPath": "MyStoreProject.BlazorApp.pdb",
-        "name": "MyStoreProject.BlazorApp.qnmdu0lgfc.pdb",
-        "hash": "sha256-9uFJFCCasRt6w7xkyDCKOdTGubRch4EQ11mfobT8RJ4=",
+        "name": "MyStoreProject.BlazorApp.egekjbvjm8.pdb",
+        "hash": "sha256-LjUS44ZnmFA44vKIwcsSR6tXYLXOwVmNQ6MhxHrW+No=",
         "cache": "force-cache"
       }
     ],
@@ -1267,6 +1267,9 @@ var e=!1;const t=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,
     ]
   },
   "debugLevel": -1,
+  "appsettings": [
+    "../appsettings.json"
+  ],
   "globalizationMode": "sharded",
   "extensions": {
     "blazor": {}

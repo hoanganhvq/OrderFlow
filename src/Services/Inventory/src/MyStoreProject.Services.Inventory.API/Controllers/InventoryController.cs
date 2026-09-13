@@ -25,7 +25,7 @@ public class InventoryController : ControllerBase
         return Ok(resultInventory.Value);
     }
 
-    [HttpPost("{sku:string}/adjust")]
+    [HttpPost("{sku}/adjust")]
     public async Task<ActionResult<InventoryResponse>> AdjustInventory(
         string sku, [FromBody] int quantity)
     {

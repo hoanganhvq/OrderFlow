@@ -12,8 +12,8 @@ using MyStoreProject.Services.Ordering.Infrastructure.Persistence;
 namespace MyStoreProject.Services.Ordering.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(OrderDbContext))]
-    [Migration("20260913051920_add_row_version")]
-    partial class add_row_version
+    [Migration("20260913093117_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

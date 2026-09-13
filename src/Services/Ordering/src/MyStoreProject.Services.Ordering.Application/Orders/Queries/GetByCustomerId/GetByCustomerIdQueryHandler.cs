@@ -19,10 +19,23 @@ public class GetByCustomerIdQueryHandler
     public async Task<Result<IEnumerable< OrderResponse>>> Handle(GetByCustomerIdQuery request, CancellationToken cancellationToken)
     {
         var orders = await _context.Orders.AsNoTracking()
+            .Include(o => o.OrderItems)
             .Where(o => o.CustomerId == request.CustomerId)
             .ToListAsync(cancellationToken);
+        
+        
+        var orderIds = orders.Select(o => o.Id).ToList();
 
-        var response = orders.Select(order => new OrderResponse(order));
-        return Result<IEnumerable< OrderResponse>>.Success(response);
+        var sagas = await _context.OrderSagaStates.AsNoTracking()
+            .Where(s => orderIds.Contains(s.OrderId))
+            .ToDictionaryAsync(s => s.OrderId, cancellationToken);
+
+        var response = orders.Select(order =>
+        {
+            sagas.TryGetValue(order.Id, out var saga);
+            return new OrderResponse(order, saga);
+        });
+
+        return Result<IEnumerable<OrderResponse>>.Success(response);
     }
 }

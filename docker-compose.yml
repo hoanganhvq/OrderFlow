@@ -6,6 +6,8 @@ services:
       - "6650:6650"
       - "8080:8080"
     command: bin/pulsar standalone
+    volumes:
+      - pulsar_data:/pulsar/data
     healthcheck:
       test: [ "CMD-SHELL", "bin/pulsar-admin brokers healthcheck || exit 1" ]
       interval: 10s
@@ -20,6 +22,8 @@ services:
       MYSQL_ROOT_PASSWORD: root
     ports:
       - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot" ]
       interval: 5s
@@ -89,4 +93,7 @@ services:
     depends_on:
       - mysql
 
+volumes:
+  mysql_data:
+  pulsar_data:
     

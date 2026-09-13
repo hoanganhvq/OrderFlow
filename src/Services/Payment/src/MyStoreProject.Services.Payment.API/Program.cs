@@ -1,5 +1,5 @@
+using System.Text.Json.Serialization;
 using BuildingBlocks.Common.Exceptions;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using MyStoreProject.Services.Payment.Application;
 using MyStoreProject.Services.Payment.Infrastructure;
@@ -11,8 +11,11 @@ var configuration = builder.Configuration;
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(configuration);
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); 
+    });builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();

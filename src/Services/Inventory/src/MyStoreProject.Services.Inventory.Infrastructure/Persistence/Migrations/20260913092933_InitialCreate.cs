@@ -37,7 +37,8 @@ namespace MyStoreProject.Services.Inventory.Infrastructure.Persistence.Migration
                     Sku = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     QuantityOnHand = table.Column<int>(type: "int", nullable: false),
-                    QuantityReserved = table.Column<int>(type: "int", nullable: false)
+                    QuantityReserved = table.Column<int>(type: "int", nullable: false),
+                    RowVersion = table.Column<DateTime>(type: "timestamp(6)", rowVersion: true, nullable: false, defaultValueSql: "CURRENT_TIMESTAMP(6)")
                 },
                 constraints: table =>
                 {
@@ -75,7 +76,8 @@ namespace MyStoreProject.Services.Inventory.Infrastructure.Persistence.Migration
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    RowVersion = table.Column<DateTime>(type: "timestamp(6)", rowVersion: true, nullable: false, defaultValueSql: "CURRENT_TIMESTAMP(6)")
                 },
                 constraints: table =>
                 {

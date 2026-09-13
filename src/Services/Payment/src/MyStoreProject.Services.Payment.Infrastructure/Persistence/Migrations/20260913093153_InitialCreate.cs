@@ -52,8 +52,9 @@ namespace MyStoreProject.Services.Payment.Infrastructure.Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     OrderId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    Amount = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false)
+                    Amount = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
+                    Status = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -65,6 +66,12 @@ namespace MyStoreProject.Services.Payment.Infrastructure.Persistence.Migrations
                 name: "IX_OUTBOX_MESSAGES_CreatedAt",
                 table: "OUTBOX_MESSAGES",
                 column: "CreatedAt");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PAYMENTS_OrderId",
+                table: "PAYMENTS",
+                column: "OrderId",
+                unique: true);
         }
 
         /// <inheritdoc />

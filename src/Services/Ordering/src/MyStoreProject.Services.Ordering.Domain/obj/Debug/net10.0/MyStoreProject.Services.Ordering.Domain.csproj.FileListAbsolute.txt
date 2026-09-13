@@ -15,3 +15,4 @@
 /home/anhphan/CTU/C#/MyStoreProject/src/Services/Ordering/src/MyStoreProject.Services.Ordering.Domain/obj/Debug/net10.0/refint/MyStoreProject.Services.Ordering.Domain.dll
 /home/anhphan/CTU/C#/MyStoreProject/src/Services/Ordering/src/MyStoreProject.Services.Ordering.Domain/obj/Debug/net10.0/MyStoreProject.Services.Ordering.Domain.pdb
 /home/anhphan/CTU/C#/MyStoreProject/src/Services/Ordering/src/MyStoreProject.Services.Ordering.Domain/obj/Debug/net10.0/ref/MyStoreProject.Services.Ordering.Domain.dll
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Ordering/src/MyStoreProject.Services.Ordering.Domain/obj/Debug/net10.0/MyStoreProject.Services.Ordering.Domain.sourcelink.json

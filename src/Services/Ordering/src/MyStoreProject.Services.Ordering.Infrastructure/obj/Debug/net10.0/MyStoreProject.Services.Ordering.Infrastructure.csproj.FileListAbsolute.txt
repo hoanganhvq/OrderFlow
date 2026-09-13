@@ -23,3 +23,4 @@
 /home/anhphan/CTU/C#/MyStoreProject/src/Services/Ordering/src/MyStoreProject.Services.Ordering.Infrastructure/obj/Debug/net10.0/ref/MyStoreProject.Services.Ordering.Infrastructure.dll
 /home/anhphan/CTU/C#/MyStoreProject/src/Services/Ordering/src/MyStoreProject.Services.Ordering.Infrastructure/bin/Debug/net10.0/MyStoreProject.Contracts.dll
 /home/anhphan/CTU/C#/MyStoreProject/src/Services/Ordering/src/MyStoreProject.Services.Ordering.Infrastructure/bin/Debug/net10.0/MyStoreProject.Contracts.pdb
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Ordering/src/MyStoreProject.Services.Ordering.Infrastructure/obj/Debug/net10.0/MyStoreProject.Services.Ordering.Infrastructure.sourcelink.json

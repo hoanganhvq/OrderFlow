@@ -1,3 +1,3 @@
 namespace MyStoreProject.BlazorApp.Models.Orders;
 
-public record OrderSummary(Guid Id, string CustomerId, string Status, decimal TotalAmount, DateTime CreatedAt) { }
+public record OrderSummary(Guid OrderId, string CustomerId, OrderStatus Status, decimal TotalPrice, DateTime CreatedAt) { }

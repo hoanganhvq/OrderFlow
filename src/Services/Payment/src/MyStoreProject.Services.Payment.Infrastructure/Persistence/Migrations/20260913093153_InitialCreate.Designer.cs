@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MyStoreProject.Services.Inventory.Infrastructure.Persistence;
+using MyStoreProject.Services.Payment.Infrastructure.Persistence;
 
 #nullable disable
 
-namespace MyStoreProject.Services.Inventory.Infrastructure.Persistence.Migrations
+namespace MyStoreProject.Services.Payment.Infrastructure.Persistence.Migrations
 {
-    [DbContext(typeof(InventoryDbContext))]
-    [Migration("20260912184304_change_St")]
-    partial class change_St
+    [DbContext(typeof(PaymentDbContext))]
+    [Migration("20260913093153_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,73 +69,29 @@ namespace MyStoreProject.Services.Inventory.Infrastructure.Persistence.Migration
                     b.ToTable("OUTBOX_MESSAGES", (string)null);
                 });
 
-            modelBuilder.Entity("MyStoreProject.Services.Inventory.Domain.Entities.Inventory", b =>
+            modelBuilder.Entity("MyStoreProject.Services.Payment.Domain.Entities.Payment", b =>
                 {
-                    b.Property<string>("Sku")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<int>("QuantityOnHand")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuantityReserved")
-                        .HasColumnType("int");
-
-                    b.HasKey("Sku");
-
-                    b.ToTable("INVENTORY", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Sku = "WIDGET-01",
-                            QuantityOnHand = 20,
-                            QuantityReserved = 0
-                        },
-                        new
-                        {
-                            Sku = "WIDGET-02",
-                            QuantityOnHand = 30,
-                            QuantityReserved = 0
-                        },
-                        new
-                        {
-                            Sku = "WIDGET-03",
-                            QuantityOnHand = 2,
-                            QuantityReserved = 0
-                        });
-                });
-
-            modelBuilder.Entity("MyStoreProject.Services.Inventory.Domain.Entities.Reservation", b =>
-                {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("char(36)");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                    b.Property<decimal>("Amount")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<Guid>("OrderId")
                         .HasColumnType("char(36)");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Sku")
+                    b.Property<string>("Status")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId", "Sku")
+                    b.HasIndex("OrderId")
                         .IsUnique();
 
-                    b.ToTable("RESERVATIONS", (string)null);
+                    b.ToTable("PAYMENTS", (string)null);
                 });
 #pragma warning restore 612, 618
         }
