@@ -12,21 +12,18 @@ namespace MyStoreProject.Services.Payment.Infrastructure.BackgroundJobs;
 
 public class ReservationSucceededConsumerJob : BaseEventConsumer<PaymentDbContext, ReservationSucceeded>
 {
-    private readonly IServiceProvider _serviceProvider;
     public ReservationSucceededConsumerJob(
         IServiceProvider serviceProvider,
         IPulsarClient pulsarClient,
         ILogger<ReservationSucceededConsumerJob> logger)
     : base(serviceProvider, pulsarClient, logger, PulsarTopics.ReservationSucceeded, PulsarSubscriptions.PaymentsReservationSucceeded)
     {
-        _serviceProvider = serviceProvider;
     }
 
-    protected override async Task<bool> HandleEventAsync(ReservationSucceeded @event, PaymentDbContext dbContext,
+    protected override async Task<bool> HandleEventAsync(ReservationSucceeded @event, IServiceProvider serviceProvider,
         CancellationToken cancellationToken = default)
     {
-        using var scope = _serviceProvider.CreateScope();
-        var sender = scope.ServiceProvider.GetRequiredService<ISender>();
+        var sender = serviceProvider.GetRequiredService<ISender>();
 
         var reservationSuccessCommand = new ProcessPaymentCommand(
             @event.EventId,

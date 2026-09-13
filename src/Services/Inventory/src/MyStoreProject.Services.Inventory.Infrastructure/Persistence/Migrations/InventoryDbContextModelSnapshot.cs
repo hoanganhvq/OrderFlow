@@ -77,6 +77,12 @@ namespace MyStoreProject.Services.Inventory.Infrastructure.Persistence.Migration
                     b.Property<int>("QuantityReserved")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("timestamp(6)")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+
                     b.HasKey("Sku");
 
                     b.ToTable("INVENTORY", (string)null);
@@ -118,6 +124,12 @@ namespace MyStoreProject.Services.Inventory.Infrastructure.Persistence.Migration
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("timestamp(6)")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
 
                     b.Property<string>("Sku")
                         .IsRequired()

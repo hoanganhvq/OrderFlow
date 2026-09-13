@@ -1,0 +1,124 @@
+@page "/place-order"
+@using MyStoreProject.BlazorApp.Models.Orders
+@inject OrderFlowClient Client
+
+<h3 class="mb-4">Place Order</h3>
+
+<h3 class="mb-4">Place Order & Saga Tracker</h3>
+
+<div class="row">
+    <div class="col-md-5">
+        <div class="card p-3 shadow-sm border-0">
+            <h5 class="mb-3">Order Details</h5>
+            <div class="mb-3">
+                <label class="form-label">Customer ID</label>
+                <input class="form-control" @bind="customerId" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">SKU</label>
+                <input class="form-control" @bind="sku" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Quantity</label>
+                <input type="number" class="form-control" @bind="quantity" min="1" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Unit Price ($)</label>
+                <input type="number" step="0.01" class="form-control" @bind="unitPrice" />
+                <small class="text-muted d-block mt-1">
+                    *Tip demo:* Tổng giá có đuôi <strong>.99</strong> (VD: 19.99) sẽ kích hoạt lỗi thanh toán giả định để test compensation.
+                </small>
+            </div>
+            <button class="btn btn-primary w-100" @onclick="SubmitOrder" disabled="@isSubmitting">
+                @(isSubmitting ? "Placing Order..." : "Submit Order")
+            </button>
+        </div>
+    </div>
+
+    <div class="col-md-7">
+        @if (currentOrder != null)
+        {
+            <div class="card p-4 shadow-sm border-0">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="m-0">Saga Progress</h5>
+                    <span class="badge @GetBadgeClass(currentOrder.Status) fs-6">@currentOrder.Status</span>
+                </div>
+                <hr />
+                <p><strong>Order ID:</strong> <code>@currentOrder.OrderId</code></p>
+                <p><strong>Total Amount:</strong> $@currentOrder.TotalAmount</p>
+                <p><strong>Inventory Reservation:</strong> @(currentOrder.ReservationCompleted ? "Completed" : "In Progress...")</p>
+                <p><strong>Payment Status:</strong> @(currentOrder.PaymentCompleted ? "Charged" : "Pending / Failed")</p>
+                <p><strong>Updated At:</strong> @currentOrder.UpdatedAt.ToLocalTime().ToString("HH:mm:ss")</p>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-light border">
+                Submit an order to monitor the choreographed saga execution live.
+            </div>
+        }
+    </div>
+</div>
+@code {
+    private string customerId = "customer-123";
+    private string sku = "WIDGET-01";
+    private int quantity = 1;
+    private decimal unitPrice = 10.00m;
+    private bool isSubmitting ;
+
+    private OrderDetail currentOrder;
+    private PeriodicTimer? timer;
+    private CancellationTokenSource? cts;
+
+    private async Task SubmitOrder()
+    {
+        isSubmitting = true;
+        currentOrder = null;
+        cts?.Cancel();
+        cts = new CancellationTokenSource();
+        var item  = new OrderItemDTO(sku,  quantity, unitPrice);
+        var items = new List<OrderItemDTO>();
+        items.Add(item);
+        var req = new OrderRequest(customerId, items);
+
+        var result = await Client.PlaceOrderAsync(req);
+        if (result != null)
+        {
+            _ = StartPollingAsync(result.OrderId, cts.Token);
+        }
+
+        isSubmitting = false;
+    }
+    
+
+    private async Task StartPollingAsync(Guid orderId, CancellationToken ct)
+    {
+        timer = new PeriodicTimer(TimeSpan.FromSeconds(1.5));
+        while (!ct.IsCancellationRequested && await timer.WaitForNextTickAsync(ct))
+        {
+            currentOrder = await Client.GetOrderAsync(orderId);
+            await InvokeAsync(StateHasChanged);
+
+            if (currentOrder?.Status is "Confirmed" or "Cancelled")
+            {
+                timer.Dispose();
+                break;
+            }
+        }
+    }
+
+    private string GetBadgeClass(string status) => status switch
+    {
+        "Confirmed" => "bg-success",
+        "Cancelled" => "bg-danger",
+        "Charging" => "bg-warning text-dark",
+        "Reserving" => "bg-info text-dark",
+        _ => "bg-secondary"
+    };
+
+    public void Dispose()
+    {
+        cts?.Cancel();
+        timer?.Dispose();
+    }
+}

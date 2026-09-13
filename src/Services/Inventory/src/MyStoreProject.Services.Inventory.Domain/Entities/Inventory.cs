@@ -17,6 +17,7 @@ public class Inventory
     public string Sku { get; private set; }
     public int QuantityOnHand { get; private set; }
     public int QuantityReserved { get; private set; }
+    public byte[] RowVersion { get; private set; } = default!;
     
     public static Result<Inventory> Create(string sku, int initialQuantity)
     {

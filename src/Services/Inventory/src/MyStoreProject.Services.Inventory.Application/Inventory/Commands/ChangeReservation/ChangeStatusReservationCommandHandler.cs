@@ -1,4 +1,5 @@
 using BuildingBlocks.Common.Results;
+using BuildingBlocks.Messaging.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MyStoreProject.Services.Inventory.Application.Abstractions.Data;
@@ -57,6 +58,10 @@ public class ChangeStatusReservationCommandHandler : IRequestHandler<ChangeStatu
                 reservation.Consume();
             }
         }
+
+        var inboxMessage = new InboxMessage(request.EventId);
+        await _context.InboxMessages.AddAsync(inboxMessage, cancellationToken);
+        
         await _context.SaveChangesAsync(cancellationToken);
         return Result.Success();
     }

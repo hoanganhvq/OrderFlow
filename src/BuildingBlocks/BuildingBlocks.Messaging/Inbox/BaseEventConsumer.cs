@@ -26,7 +26,7 @@ public abstract class BaseEventConsumer<TContext, TEvent> : BackgroundService
     private readonly string _subscription;
     private readonly ILogger<BaseEventConsumer<TContext, TEvent>> _logger;
     
-    protected abstract Task<bool> HandleEventAsync(TEvent @event, TContext dbContext,
+    protected abstract Task<bool> HandleEventAsync(TEvent @event, IServiceProvider serviceProvider,
         CancellationToken cancellationToken = default);
     
     public BaseEventConsumer(IServiceProvider serviceProvider,
@@ -55,7 +55,7 @@ public abstract class BaseEventConsumer<TContext, TEvent> : BackgroundService
         await using var consumer = _pulsarClient.NewConsumer()
             .Topic(_topic)
             .SubscriptionName(_subscription)
-            .SubscriptionType(SubscriptionType.Shared)
+            .SubscriptionType(SubscriptionType.KeyShared)
             .Create();
         
         await foreach (var message in consumer.Messages(stoppingToken)) 
@@ -93,11 +93,12 @@ public abstract class BaseEventConsumer<TContext, TEvent> : BackgroundService
                         continue;
                     }
                 
-                    await HandleEventAsync(payloadEvent, context, stoppingToken);
-                        
-                    var inboxMessage = new InboxMessage(eventId);
-                    await context.InboxMessages.AddAsync(inboxMessage, stoppingToken);
-                    await context.SaveChangesAsync(stoppingToken);
+                    var isSuccess = await HandleEventAsync(payloadEvent, scope.ServiceProvider, stoppingToken);
+                    
+                    if (!isSuccess)
+                    {
+                        throw new InvalidOperationException("Failed to process event.");
+                    }
                     await consumer.Acknowledge(message, stoppingToken);
                 }
             }
@@ -125,7 +126,7 @@ public abstract class BaseEventConsumer<TContext, TEvent> : BackgroundService
                         metadata[prop.Key] = prop.Value;
                     }
                     metadata["X-Retry-Count"] = retryCount.ToString();  
-                        
+                    
                     await retryProducer.Send(metadata, message.Data, stoppingToken);
                     await consumer.Acknowledge(message, stoppingToken); 
                 }

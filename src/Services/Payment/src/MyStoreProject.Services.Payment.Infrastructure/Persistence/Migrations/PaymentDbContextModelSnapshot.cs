@@ -85,6 +85,9 @@ namespace MyStoreProject.Services.Payment.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("OrderId")
+                        .IsUnique();
+
                     b.ToTable("PAYMENTS", (string)null);
                 });
 #pragma warning restore 612, 618

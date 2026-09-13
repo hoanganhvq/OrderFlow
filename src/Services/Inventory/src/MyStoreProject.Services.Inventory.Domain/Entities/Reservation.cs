@@ -19,6 +19,8 @@ public class Reservation
     
     public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
 
+    public byte[] RowVersion { get; private set; } = default!;
+
     private Reservation() { }
     
     public static Result<Reservation> Create(Guid orderId, string sku, int quantity)

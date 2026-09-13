@@ -13,6 +13,10 @@ public class InventoryConfiguration : IEntityTypeConfiguration<Domain.Entities.I
             .IsRequired();
         builder.Property(i=>i.QuantityReserved)
             .IsRequired();
+        
+        builder.Property(i => i.RowVersion)
+            .IsRowVersion()
+            .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");;
 
         var item1 = Domain.Entities.Inventory. Create("WIDGET-01", 20).Value;
         var item2 = Domain.Entities.Inventory.Create("WIDGET-02", 30).Value;

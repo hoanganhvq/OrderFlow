@@ -16,8 +16,4 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.19" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Saga\" />
-  </ItemGroup>
-
 </Project>

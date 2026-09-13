@@ -1,9 +1,7 @@
 <Solution>
   <Folder Name="/src/" />
-  <Folder Name="/src/Apps/" />
-  <Folder Name="/src/Apps/MyStoreProject.BlazorApp/">
-    <Project Path="src/Apps/MyStoreProject.BlazorApp/MyStoreProject.BlazorApp.Client/MyStoreProject.BlazorApp.Client.csproj" />
-    <Project Path="src/Apps/MyStoreProject.BlazorApp/MyStoreProject.BlazorApp/MyStoreProject.BlazorApp.csproj" />
+  <Folder Name="/src/Apps/">
+    <Project Path="src/Apps/MyStoreProject.BlazorApp/MyStoreProject.BlazorApp.csproj" />
   </Folder>
   <Folder Name="/src/BuildingBlocks/">
     <Project Path="src/BuildingBlocks/BuildingBlocks.Common/BuildingBlocks.Common.csproj" />

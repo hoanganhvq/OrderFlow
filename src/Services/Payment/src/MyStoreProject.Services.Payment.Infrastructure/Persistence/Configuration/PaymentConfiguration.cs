@@ -12,6 +12,10 @@ public class PaymentConfiguration : IEntityTypeConfiguration<Domain.Entities.Pay
 
         builder.Property(p => p.OrderId)
             .IsRequired();
+        
+        builder.HasIndex(p => p.OrderId)
+            .IsUnique();
+        
         builder.Property(p=>p.Status)
             .HasConversion<string>()
             .IsRequired();

@@ -60,13 +60,18 @@ public class ProcessPaymentCommandHandler : IRequestHandler<ProcessPaymentComman
             
             outboxMessage = new OutboxMessage(
                 id: Guid.NewGuid(),
-                eventId: Guid.NewGuid(),
+                eventId: paymentFailed.EventId,
                 topic: PulsarTopics.PaymentFailed,
                 payload: JsonSerializer.Serialize(paymentFailed));
         }
+
+        var inboxMessage = new InboxMessage(request.EventId);
+        await _context.InboxMessages.AddAsync(inboxMessage, cancellationToken);
         
-        await _context.Payments.AddAsync(payment);
+        await _context.Payments.AddAsync(payment, cancellationToken);
+        
         await _context.OutboxMessages.AddAsync(outboxMessage);
+        
         await _context.SaveChangesAsync(cancellationToken);
         return Result.Success();
     }

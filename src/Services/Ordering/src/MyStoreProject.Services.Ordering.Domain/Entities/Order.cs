@@ -16,7 +16,7 @@ public class Order
     public OrderStatus Status { get; private set; } = OrderStatus.Pending;
     public DateTime CreatedAt { get; private set; } =  DateTime.UtcNow;
     public DateTime UpdatedAt { get; private set; } =  DateTime.UtcNow;
-    
+    public byte[] RowVersion { get; private set; } = default!;
     private Order() { }
     
     private Order(string customerId)

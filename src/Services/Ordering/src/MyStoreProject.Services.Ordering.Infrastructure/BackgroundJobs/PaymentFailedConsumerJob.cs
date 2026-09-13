@@ -13,21 +13,17 @@ namespace MyStoreProject.Services.Ordering.Infrastructure.BackgroundJobs;
 
 public class PaymentFailedConsumerJob : BaseEventConsumer<OrderDbContext, PaymentFailed>
 {
-    private readonly IServiceProvider _serviceProvider;
-
     public PaymentFailedConsumerJob(
         IServiceProvider serviceProvider,
         IPulsarClient pulsarClient,
         ILogger<PaymentFailedConsumerJob> logger) 
         : base(serviceProvider, pulsarClient, logger, PulsarTopics.PaymentFailed, PulsarSubscriptions.OrdersPaymentFailed)
     {
-        _serviceProvider = serviceProvider;
     }
 
-    protected override async Task<bool> HandleEventAsync(PaymentFailed @event, OrderDbContext dbContext, CancellationToken cancellationToken = default)
+    protected override async Task<bool> HandleEventAsync(PaymentFailed @event, IServiceProvider serviceProvider, CancellationToken cancellationToken = default)
     {
-        using var scope = _serviceProvider.CreateScope();
-        var sender = scope.ServiceProvider.GetRequiredService<ISender>();
+        var sender = serviceProvider.GetRequiredService<ISender>();
         
         var command = new UpdateOrderStatusCommand(
             @event.EventId,

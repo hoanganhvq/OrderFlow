@@ -13,23 +13,20 @@ namespace MyStoreProject.Services.Inventory.Infrastructure.BackgroundJobs;
 
 public class PaymentSuccesConsumerJob : BaseEventConsumer<InventoryDbContext, PaymentSucceeded>
 {
-    private  readonly IServiceProvider _serviceProvider;
     public PaymentSuccesConsumerJob(
         IServiceProvider serviceProvider,
         IPulsarClient pulsarClient,
         ILogger<PaymentSuccesConsumerJob> logger
     ) : base(serviceProvider, pulsarClient, logger,
-        PulsarTopics.PaymentFailed, 
-        PulsarSubscriptions.InventoryPaymentFailed)
+        PulsarTopics.PaymentSucceeded, 
+        PulsarSubscriptions.InventoryPaymentSucceeded)
     {
-        _serviceProvider = serviceProvider;
     }
 
-    protected override async  Task<bool> HandleEventAsync(PaymentSucceeded @event, InventoryDbContext dbContext,
+    protected override async  Task<bool> HandleEventAsync(PaymentSucceeded @event, IServiceProvider serviceProvider,
         CancellationToken cancellationToken = default)
     {
-        using var scope = _serviceProvider.CreateScope();
-        var sender = scope.ServiceProvider.GetRequiredService<ISender>();
+        var sender = serviceProvider.GetRequiredService<ISender>();
 
         var command = new ChangeStatusReservationCommand(
             @event.EventId,

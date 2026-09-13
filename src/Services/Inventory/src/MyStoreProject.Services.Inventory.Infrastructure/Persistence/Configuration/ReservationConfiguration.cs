@@ -18,5 +18,9 @@ public class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
 
         builder.HasIndex(r => new { r.OrderId, r.Sku })
             .IsUnique();
+        
+        builder.Property(r => r.RowVersion)
+            .IsRowVersion()
+            .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");;
     }
 }

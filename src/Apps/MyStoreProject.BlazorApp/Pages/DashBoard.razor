@@ -1,0 +1,117 @@
+@page "/dashboard"
+@page "/"
+@using MyStoreProject.BlazorApp.Models.Inventory
+@using MyStoreProject.BlazorApp.Models.Orders
+@inject OrderFlowClient Client
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3>Saga & Stock Dashboard</h3>
+    <button class="btn btn-outline-primary" @onclick="RefreshAll">Refresh Data</button>
+</div>
+
+<div class="card p-3 shadow-sm border-0 mb-4">
+    <h5 class="card-title">Inventory Stock Status</h5>
+    @if (stocks == null)
+    {
+        <p>Loading stock data...</p>
+    }
+    else
+    {
+        <table class="table table-striped table-hover mt-2">
+            <thead class="table-dark">
+                <tr>
+                    <th>SKU</th>
+                    <th>On Hand</th>
+                    <th>Reserved</th>
+                    <th>Available</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var s in stocks)
+                {
+                    <tr>
+                        <td><strong>@s.Sku</strong></td>
+                        <td>@s.QuantityOnHand</td>
+                        <td><span class="badge bg-warning text-dark">@s.QuantityReserved</span></td>
+                        <td><span class="badge bg-success">@s.Available</span></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+<div class="card p-3 shadow-sm border-0">
+    <div class="d-flex align-items-center mb-3">
+        <h5 class="card-title m-0 me-3">Recent Orders for Customer:</h5>
+        <input class="form-control form-control-sm w-auto" @bind="customerId" />
+        <button class="btn btn-sm btn-secondary ms-2" @onclick="LoadOrders">Query</button>
+    </div>
+
+    @if (orders == null)
+    {
+        <p>Loading orders...</p>
+    }
+    else if (!orders.Any())
+    {
+        <p class="text-muted">No orders found for this customer.</p>
+    }
+    else
+    {
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Created At</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ord in orders)
+                {
+                    <tr>
+                        <td><code>@ord.Id</code></td>
+                        <td>$@ord.TotalAmount</td>
+                        <td><span class="badge @GetBadgeClass(ord.Status)">@ord.Status</span></td>
+                        <td>@ord.CreatedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+@code {
+    private string customerId = "cust-123";
+    private List<InventoryDTO>? stocks;
+    private List<OrderSummary>? orders;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await RefreshAll();
+    }
+
+    private async Task RefreshAll()
+    {
+        await Task.WhenAll(LoadStock(), LoadOrders());
+    }
+
+    private async Task LoadStock()
+    {
+        stocks = await Client.GetStockAsync();
+    }
+
+    private async Task LoadOrders()
+    {
+        orders = await Client.GetOrdersByCustomerAsync(customerId);
+    }
+
+    private string GetBadgeClass(string status) => status switch
+    {
+        "Confirmed" => "bg-success",
+        "Cancelled" => "bg-danger",
+        "Charging" => "bg-warning text-dark",
+        _ => "bg-secondary"
+    };
+}

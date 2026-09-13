@@ -13,8 +13,6 @@ namespace MyStoreProject.Services.Inventory.Infrastructure.BackgroundJobs;
 
 public class PaymentFailedConsumerJob : BaseEventConsumer<InventoryDbContext, PaymentFailed>
 {
-    
-    private  readonly IServiceProvider _serviceProvider;
     public PaymentFailedConsumerJob(
         IServiceProvider serviceProvider,
         IPulsarClient pulsarClient,
@@ -23,15 +21,13 @@ public class PaymentFailedConsumerJob : BaseEventConsumer<InventoryDbContext, Pa
         PulsarTopics.PaymentFailed, 
         PulsarSubscriptions.InventoryPaymentFailed)
     {
-        _serviceProvider = serviceProvider;
     }
 
     protected override async Task<bool> HandleEventAsync(PaymentFailed @event, 
-        InventoryDbContext dbContext,
+        IServiceProvider serviceProvider,
         CancellationToken cancellationToken = default)
     {
-        using var scope = _serviceProvider.CreateScope();
-        var sender = scope.ServiceProvider.GetRequiredService<ISender>();
+        var sender = serviceProvider.GetRequiredService<ISender>();
 
         var command = new ChangeStatusReservationCommand(
             @event.EventId,

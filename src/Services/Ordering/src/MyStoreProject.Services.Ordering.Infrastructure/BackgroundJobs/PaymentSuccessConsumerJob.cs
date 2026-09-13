@@ -13,20 +13,17 @@ namespace MyStoreProject.Services.Ordering.Infrastructure.BackgroundJobs;
 
 public class PaymentSuccessConsumerJob : BaseEventConsumer<OrderDbContext,PaymentSucceeded>
 {
-    private readonly IServiceProvider _serviceProvider;
 
     public PaymentSuccessConsumerJob(IServiceProvider serviceProvider,
         ILogger<PaymentSuccessConsumerJob> logger,
         IPulsarClient pulsarClient)
     : base(serviceProvider, pulsarClient, logger, PulsarTopics.PaymentSucceeded, PulsarSubscriptions.OrdersPaymentSucceeded)
     {
-        _serviceProvider = serviceProvider;
     }
 
-    protected override async Task<bool> HandleEventAsync(PaymentSucceeded @event, OrderDbContext dbContext, CancellationToken cancellationToken = default)
+    protected override async Task<bool> HandleEventAsync(PaymentSucceeded @event, IServiceProvider serviceProvider, CancellationToken cancellationToken = default)
     {
-        using var scope = _serviceProvider.CreateScope();
-        var sender = scope.ServiceProvider.GetRequiredService<ISender>();
+        var sender = serviceProvider.GetRequiredService<ISender>();
 
         var command = new UpdateOrderStatusCommand(
             @event.EventId,

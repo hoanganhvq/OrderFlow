@@ -16,25 +16,26 @@ public class ReserveInventoryCommandHandler : IRequestHandler<ReserveInventoryCo
     {
         _context = context;
     }
-    
+
     public async Task<Result> Handle(ReserveInventoryCommand request, CancellationToken cancellationToken)
     {
         var skus = request.Items.Select(i => i.Sku).Distinct().ToList();
         var stockItems = await _context.Inventories
             .Where(s => skus.Contains(s.Sku))
             .ToDictionaryAsync(s => s.Sku, cancellationToken);
-        
         var hasEnoughStock = true;
         string? failureReason = null;
         foreach (var item in request.Items)
         {
-            if (!stockItems.TryGetValue(item.Sku, out var stock) || (stock.QuantityOnHand - stock.QuantityReserved) < item.Quantity)
+            if (!stockItems.TryGetValue(item.Sku, out var stock) ||
+                (stock.QuantityOnHand - stock.QuantityReserved) < item.Quantity)
             {
                 hasEnoughStock = false;
                 failureReason = $"SKU {item.Sku} not enough.";
                 break;
             }
         }
+
         if (hasEnoughStock)
         {
             foreach (var item in request.Items)
@@ -45,12 +46,14 @@ public class ReserveInventoryCommandHandler : IRequestHandler<ReserveInventoryCo
                 {
                     return Result.Failure(reserveResult.Error);
                 }
-                
-                var createdReservation = Domain.Entities.Reservation.Create(request.OrderId, item.Sku, item.Quantity);
+
+                var createdReservation =
+                    Domain.Entities.Reservation.Create(request.OrderId, item.Sku, item.Quantity);
                 if (!createdReservation.IsSuccess)
                 {
                     return Result.Failure(createdReservation.Error);
                 }
+
                 await _context.Reservations.AddAsync(createdReservation.Value, cancellationToken);
             }
 
@@ -65,7 +68,7 @@ public class ReserveInventoryCommandHandler : IRequestHandler<ReserveInventoryCo
                 topic: PulsarTopics.ReservationSucceeded,
                 payload: JsonSerializer.Serialize(succeededEvent)
             );
-            
+
             await _context.OutboxMessages.AddAsync(outboxMessage, cancellationToken);
         }
         else
@@ -80,9 +83,12 @@ public class ReserveInventoryCommandHandler : IRequestHandler<ReserveInventoryCo
                 eventId: failedEvent.EventId,
                 topic: PulsarTopics.ReservationFailed,
                 payload: JsonSerializer.Serialize(failedEvent));
-            
+
             await _context.OutboxMessages.AddAsync(outboxMessage, cancellationToken);
         }
+
+        var inbox = new InboxMessage(request.EventId);
+        await _context.InboxMessages.AddAsync(inbox, cancellationToken);
 
         await _context.SaveChangesAsync(cancellationToken);
         return Result.Success();

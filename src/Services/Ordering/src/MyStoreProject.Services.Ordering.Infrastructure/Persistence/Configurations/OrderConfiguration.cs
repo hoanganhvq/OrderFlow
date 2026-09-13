@@ -33,5 +33,9 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
             .WithOne()
             .HasForeignKey(oi => oi.OrderId)
             .OnDelete(DeleteBehavior.Cascade);
+        
+        builder.Property(o => o.RowVersion)
+            .IsRowVersion()
+            .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");;
     }
 }

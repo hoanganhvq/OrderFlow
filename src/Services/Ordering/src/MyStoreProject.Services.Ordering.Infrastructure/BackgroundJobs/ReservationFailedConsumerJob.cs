@@ -13,7 +13,6 @@ namespace MyStoreProject.Services.Ordering.Infrastructure.BackgroundJobs;
 
 public class ReservationFailedConsumerJob : BaseEventConsumer<OrderDbContext, ReservationFailed>
 {
-    private readonly IServiceProvider _serviceProvider;
 
     public ReservationFailedConsumerJob(
         IServiceProvider serviceProvider,
@@ -21,14 +20,12 @@ public class ReservationFailedConsumerJob : BaseEventConsumer<OrderDbContext, Re
         ILogger<ReservationFailedConsumerJob> logger)
     : base(serviceProvider, pulsarClient, logger, PulsarTopics.ReservationFailed, PulsarSubscriptions.OrdersReservationFailed)
     {
-        _serviceProvider = serviceProvider;
     }
 
-    protected override async Task<bool> HandleEventAsync(ReservationFailed @event, OrderDbContext dbContext,
+    protected override async Task<bool> HandleEventAsync(ReservationFailed @event, IServiceProvider serviceProvider,
         CancellationToken cancellationToken = default)
     {
-        using var scope = _serviceProvider.CreateScope();
-        var sender = scope.ServiceProvider.GetRequiredService<ISender>();
+        var sender = serviceProvider.GetRequiredService<ISender>();
 
         var command = new UpdateOrderStatusCommand(
             @event.EventId,

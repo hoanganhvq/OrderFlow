@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 3,
   "targets": {
     "net10.0": {
       "DotPulsar/5.3.3": {
@@ -5837,7 +5837,6 @@
       },
       "frameworks": {
         "net10.0": {
-          "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {
             "/home/anhphan/CTU/C#/MyStoreProject/src/Services/Ordering/src/MyStoreProject.Services.Ordering.Application/MyStoreProject.Services.Ordering.Application.csproj": {
@@ -5860,7 +5859,6 @@
     },
     "frameworks": {
       "net10.0": {
-        "framework": "net10.0",
         "targetAlias": "net10.0",
         "dependencies": {
           "DotPulsar": {
