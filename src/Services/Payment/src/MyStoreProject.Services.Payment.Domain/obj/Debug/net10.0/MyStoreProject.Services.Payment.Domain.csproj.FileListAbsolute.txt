@@ -1,0 +1,15 @@
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Payment/src/MyStoreProject.Services.Payment.Domain/bin/Debug/net10.0/MyStoreProject.Services.Payment.Domain.deps.json
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Payment/src/MyStoreProject.Services.Payment.Domain/bin/Debug/net10.0/MyStoreProject.Services.Payment.Domain.dll
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Payment/src/MyStoreProject.Services.Payment.Domain/bin/Debug/net10.0/MyStoreProject.Services.Payment.Domain.pdb
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Payment/src/MyStoreProject.Services.Payment.Domain/obj/Debug/net10.0/MyStoreProject.Services.Payment.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Payment/src/MyStoreProject.Services.Payment.Domain/obj/Debug/net10.0/MyStoreProject.Services.Payment.Domain.AssemblyInfoInputs.cache
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Payment/src/MyStoreProject.Services.Payment.Domain/obj/Debug/net10.0/MyStoreProject.Services.Payment.Domain.AssemblyInfo.cs
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Payment/src/MyStoreProject.Services.Payment.Domain/obj/Debug/net10.0/MyStoreProject.Services.Payment.Domain.csproj.CoreCompileInputs.cache
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Payment/src/MyStoreProject.Services.Payment.Domain/obj/Debug/net10.0/MyStoreProject.Services.Payment.Domain.dll
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Payment/src/MyStoreProject.Services.Payment.Domain/obj/Debug/net10.0/refint/MyStoreProject.Services.Payment.Domain.dll
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Payment/src/MyStoreProject.Services.Payment.Domain/obj/Debug/net10.0/MyStoreProject.Services.Payment.Domain.pdb
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Payment/src/MyStoreProject.Services.Payment.Domain/obj/Debug/net10.0/ref/MyStoreProject.Services.Payment.Domain.dll
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Payment/src/MyStoreProject.Services.Payment.Domain/bin/Debug/net10.0/BuildingBlocks.Common.dll
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Payment/src/MyStoreProject.Services.Payment.Domain/bin/Debug/net10.0/BuildingBlocks.Common.pdb
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Payment/src/MyStoreProject.Services.Payment.Domain/obj/Debug/net10.0/MyStoreProject.Services.Payment.Domain.csproj.AssemblyReference.cache
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Payment/src/MyStoreProject.Services.Payment.Domain/obj/Debug/net10.0/MyStoreP.034D33A3.Up2Date

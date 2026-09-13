@@ -1,0 +1,15 @@
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Inventory/src/MyStoreProject.Services.Inventory.Domain/bin/Debug/net10.0/MyStoreProject.Services.Inventory.Domain.deps.json
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Inventory/src/MyStoreProject.Services.Inventory.Domain/bin/Debug/net10.0/MyStoreProject.Services.Inventory.Domain.dll
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Inventory/src/MyStoreProject.Services.Inventory.Domain/bin/Debug/net10.0/MyStoreProject.Services.Inventory.Domain.pdb
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Inventory/src/MyStoreProject.Services.Inventory.Domain/bin/Debug/net10.0/BuildingBlocks.Common.dll
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Inventory/src/MyStoreProject.Services.Inventory.Domain/bin/Debug/net10.0/BuildingBlocks.Common.pdb
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Inventory/src/MyStoreProject.Services.Inventory.Domain/obj/Debug/net10.0/MyStoreProject.Services.Inventory.Domain.csproj.AssemblyReference.cache
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Inventory/src/MyStoreProject.Services.Inventory.Domain/obj/Debug/net10.0/MyStoreProject.Services.Inventory.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Inventory/src/MyStoreProject.Services.Inventory.Domain/obj/Debug/net10.0/MyStoreProject.Services.Inventory.Domain.AssemblyInfoInputs.cache
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Inventory/src/MyStoreProject.Services.Inventory.Domain/obj/Debug/net10.0/MyStoreProject.Services.Inventory.Domain.AssemblyInfo.cs
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Inventory/src/MyStoreProject.Services.Inventory.Domain/obj/Debug/net10.0/MyStoreProject.Services.Inventory.Domain.csproj.CoreCompileInputs.cache
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Inventory/src/MyStoreProject.Services.Inventory.Domain/obj/Debug/net10.0/MyStoreP.3FFCD7CF.Up2Date
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Inventory/src/MyStoreProject.Services.Inventory.Domain/obj/Debug/net10.0/MyStoreProject.Services.Inventory.Domain.dll
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Inventory/src/MyStoreProject.Services.Inventory.Domain/obj/Debug/net10.0/refint/MyStoreProject.Services.Inventory.Domain.dll
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Inventory/src/MyStoreProject.Services.Inventory.Domain/obj/Debug/net10.0/MyStoreProject.Services.Inventory.Domain.pdb
+/home/anhphan/CTU/C#/MyStoreProject/src/Services/Inventory/src/MyStoreProject.Services.Inventory.Domain/obj/Debug/net10.0/ref/MyStoreProject.Services.Inventory.Domain.dll

@@ -1,0 +1,92 @@
+services:
+  pulsar:
+    image: apachepulsar/pulsar:3.3.0
+    container_name: orderflow-pulsar
+    ports:
+      - "6650:6650"
+      - "8080:8080"
+    command: bin/pulsar standalone
+    healthcheck:
+      test: [ "CMD-SHELL", "bin/pulsar-admin brokers healthcheck || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+      
+  mysql:
+    image: mysql:8.0
+    container_name: orderflow-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      
+  order-service:
+    build:
+      context: .
+      dockerfile: src/Services/Ordering/src/MyStoreProject.Services.Ordering.API/Dockerfile
+    container_name: orders-service
+    ports:
+      - "5001:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__OrderingConnectionString=Server=mysql;Port=3306;Database=orderflow_orders;User=root;Password=root;
+      - Pulsar__ServiceUrl=pulsar://pulsar:6650
+    depends_on:
+      pulsar:
+        condition: service_healthy
+      mysql:
+        condition: service_healthy
+  
+  inventory-service:
+    build:
+      context: .
+      dockerfile: src/Services/Inventory/src/MyStoreProject.Services.Inventory.API/Dockerfile      
+    container_name: inventory-service
+    ports:
+      - "5002:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__InventoryConnectionString=Server=mysql;Port=3306;Database=orderflow_inventory;User=root;Password=root;
+      - Pulsar__ServiceUrl=pulsar://pulsar:6650
+    depends_on:
+      pulsar:
+        condition: service_healthy
+      mysql:
+        condition: service_healthy
+      
+  payments-service:
+    build:
+      context: .
+      dockerfile: src/Services/Payment/src/MyStoreProject.Services.Payment.API/Dockerfile
+    container_name: payments-service
+    ports:
+      - "5003:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__PaymentConnectionsString=Server=mysql;Port=3306;Database=orderflow_payments;User=root;Password=root;
+      - Pulsar__ServiceUrl=pulsar://pulsar:6650
+    depends_on:
+      pulsar:
+        condition: service_healthy
+      mysql:
+        condition: service_healthy      
+    
+  
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: orderflow-phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      UPLOAD_LIMIT: 300M
+    ports:
+      - "8081:80"
+    depends_on:
+      - mysql
+
+    

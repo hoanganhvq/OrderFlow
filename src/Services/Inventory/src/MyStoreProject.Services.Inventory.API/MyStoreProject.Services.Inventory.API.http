@@ -1,0 +1,6 @@
+@MyStoreProject.Services.Inventory.API_HostAddress = http://localhost:5098
+
+GET {{MyStoreProject.Services.Inventory.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

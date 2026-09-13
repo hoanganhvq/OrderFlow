@@ -1,0 +1,3 @@
+CREATE DATABASE IF NOT EXISTS orderflow_orders;
+CREATE DATABASE IF NOT EXISTS orderflow_inventory;
+CREATE DATABASE IF NOT EXISTS orderflow_payments;

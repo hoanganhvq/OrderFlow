@@ -1,0 +1,6 @@
+@MyStoreProject.Services.Payment.API_HostAddress = http://localhost:5128
+
+GET {{MyStoreProject.Services.Payment.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

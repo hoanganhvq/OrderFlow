@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Shared\MyStoreProject.Contracts\MyStoreProject.Contracts.csproj" />
+    <ProjectReference Include="..\MyStoreProject.Services.Ordering.Domain\MyStoreProject.Services.Ordering.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.19" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Saga\" />
+  </ItemGroup>
+
+</Project>

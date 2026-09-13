@@ -1,0 +1,12 @@
+/home/anhphan/CTU/C#/MyStoreProject/src/BuildingBlocks/BuildingBlocks.Common/bin/Debug/net10.0/BuildingBlocks.Common.deps.json
+/home/anhphan/CTU/C#/MyStoreProject/src/BuildingBlocks/BuildingBlocks.Common/bin/Debug/net10.0/BuildingBlocks.Common.dll
+/home/anhphan/CTU/C#/MyStoreProject/src/BuildingBlocks/BuildingBlocks.Common/bin/Debug/net10.0/BuildingBlocks.Common.pdb
+/home/anhphan/CTU/C#/MyStoreProject/src/BuildingBlocks/BuildingBlocks.Common/obj/Debug/net10.0/BuildingBlocks.Common.csproj.AssemblyReference.cache
+/home/anhphan/CTU/C#/MyStoreProject/src/BuildingBlocks/BuildingBlocks.Common/obj/Debug/net10.0/BuildingBlocks.Common.GeneratedMSBuildEditorConfig.editorconfig
+/home/anhphan/CTU/C#/MyStoreProject/src/BuildingBlocks/BuildingBlocks.Common/obj/Debug/net10.0/BuildingBlocks.Common.AssemblyInfoInputs.cache
+/home/anhphan/CTU/C#/MyStoreProject/src/BuildingBlocks/BuildingBlocks.Common/obj/Debug/net10.0/BuildingBlocks.Common.AssemblyInfo.cs
+/home/anhphan/CTU/C#/MyStoreProject/src/BuildingBlocks/BuildingBlocks.Common/obj/Debug/net10.0/BuildingBlocks.Common.csproj.CoreCompileInputs.cache
+/home/anhphan/CTU/C#/MyStoreProject/src/BuildingBlocks/BuildingBlocks.Common/obj/Debug/net10.0/BuildingBlocks.Common.dll
+/home/anhphan/CTU/C#/MyStoreProject/src/BuildingBlocks/BuildingBlocks.Common/obj/Debug/net10.0/refint/BuildingBlocks.Common.dll
+/home/anhphan/CTU/C#/MyStoreProject/src/BuildingBlocks/BuildingBlocks.Common/obj/Debug/net10.0/BuildingBlocks.Common.pdb
+/home/anhphan/CTU/C#/MyStoreProject/src/BuildingBlocks/BuildingBlocks.Common/obj/Debug/net10.0/ref/BuildingBlocks.Common.dll

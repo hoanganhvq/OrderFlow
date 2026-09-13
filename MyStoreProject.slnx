@@ -1,0 +1,44 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Apps/" />
+  <Folder Name="/src/Apps/MyStoreProject.BlazorApp/">
+    <Project Path="src/Apps/MyStoreProject.BlazorApp/MyStoreProject.BlazorApp.Client/MyStoreProject.BlazorApp.Client.csproj" />
+    <Project Path="src/Apps/MyStoreProject.BlazorApp/MyStoreProject.BlazorApp/MyStoreProject.BlazorApp.csproj" />
+  </Folder>
+  <Folder Name="/src/BuildingBlocks/">
+    <Project Path="src/BuildingBlocks/BuildingBlocks.Common/BuildingBlocks.Common.csproj" />
+    <Project Path="src/BuildingBlocks/BuildingBlocks.Messaging/BuildingBlocks.Messaging.csproj" />
+  </Folder>
+  <Folder Name="/src/Gateways/">
+    <Project Path="src/Gateways/MyStoreProject.ApiGateway/MyStoreProject.ApiGateway.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/" />
+  <Folder Name="/src/Services/Identity/" />
+  <Folder Name="/src/Services/Identity/src/">
+    <Project Path="src/Services/Identity/src/MyStoreProject.Services.Identity.API/MyStoreProject.Services.Identity.API.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/Inventory/" />
+  <Folder Name="/src/Services/Inventory/src/">
+    <Project Path="src/Services/Inventory/src/MyStoreProject.Services.Inventory.API/MyStoreProject.Services.Inventory.API.csproj" />
+    <Project Path="src/Services/Inventory/src/MyStoreProject.Services.Inventory.Application/MyStoreProject.Services.Inventory.Application.csproj" />
+    <Project Path="src/Services/Inventory/src/MyStoreProject.Services.Inventory.Domain/MyStoreProject.Services.Inventory.Domain.csproj" />
+    <Project Path="src/Services/Inventory/src/MyStoreProject.Services.Inventory.Infrastructure/MyStoreProject.Services.Inventory.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/Ordering/" />
+  <Folder Name="/src/Services/Ordering/src/">
+    <Project Path="src/Services/Ordering/src/MyStoreProject.Services.Ordering.API/MyStoreProject.Services.Ordering.API.csproj" />
+    <Project Path="src/Services/Ordering/src/MyStoreProject.Services.Ordering.Application/MyStoreProject.Services.Ordering.Application.csproj" />
+    <Project Path="src/Services/Ordering/src/MyStoreProject.Services.Ordering.Domain/MyStoreProject.Services.Ordering.Domain.csproj" />
+    <Project Path="src/Services/Ordering/src/MyStoreProject.Services.Ordering.Infrastructure/MyStoreProject.Services.Ordering.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/Payment/" />
+  <Folder Name="/src/Services/Payment/src/">
+    <Project Path="src/Services/Payment/src/MyStoreProject.Services.Payment.API/MyStoreProject.Services.Payment.API.csproj" />
+    <Project Path="src/Services/Payment/src/MyStoreProject.Services.Payment.Application/MyStoreProject.Services.Payment.Application.csproj" />
+    <Project Path="src/Services/Payment/src/MyStoreProject.Services.Payment.Domain/MyStoreProject.Services.Payment.Domain.csproj" />
+    <Project Path="src/Services/Payment/src/MyStoreProject.Services.Payment.Infrastructure/MyStoreProject.Services.Payment.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Shared/">
+    <Project Path="src/Shared/MyStoreProject.Contracts/MyStoreProject.Contracts.csproj" />
+  </Folder>
+</Solution>
